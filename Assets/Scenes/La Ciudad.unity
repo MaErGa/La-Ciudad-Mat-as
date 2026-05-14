@@ -2320,9 +2320,15 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1000013763268812, guid: 02171a191edcf2443bb2f9a697e0160a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1266238764}
     - targetCorrespondingSourceObject: {fileID: 1000010852838886, guid: 02171a191edcf2443bb2f9a697e0160a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1248576921}
+    - targetCorrespondingSourceObject: {fileID: 1000010852838886, guid: 02171a191edcf2443bb2f9a697e0160a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1248576925}
   m_SourcePrefab: {fileID: 100100000, guid: 02171a191edcf2443bb2f9a697e0160a, type: 3}
 --- !u!1001 &158013038
 PrefabInstance:
@@ -14696,6 +14702,7 @@ GameObject:
   m_Component:
   - component: {fileID: 953552511}
   - component: {fileID: 953552512}
+  - component: {fileID: 953552513}
   m_Layer: 0
   m_Name: Point Light (6)
   m_TagString: Untagged
@@ -14780,6 +14787,21 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &953552513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 953552510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b2ac129d42a43248bc010f50dc9e924, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocidad: 8
+  limiteZ: 100
+  finCarretera: -100
 --- !u!4 &954897763 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 459742, guid: b2fcb4869e568194ebff11fc13530282, type: 3}
@@ -14795,6 +14817,7 @@ GameObject:
   m_Component:
   - component: {fileID: 954968857}
   - component: {fileID: 954968858}
+  - component: {fileID: 954968859}
   m_Layer: 0
   m_Name: Point Light
   m_TagString: Untagged
@@ -14879,6 +14902,21 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &954968859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 954968856}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b2ac129d42a43248bc010f50dc9e924, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocidad: 8
+  limiteZ: 100
+  finCarretera: -100
 --- !u!1001 &963939418
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15319,6 +15357,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2fcb4869e568194ebff11fc13530282, type: 3}
+--- !u!1 &1004185769 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1000013763268812, guid: 02171a191edcf2443bb2f9a697e0160a, type: 3}
+  m_PrefabInstance: {fileID: 156305691}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1011643099 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 453006, guid: 3d01ef65dd7df27469c08a5faaf917bd, type: 3}
@@ -15433,6 +15476,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1023423587}
   - component: {fileID: 1023423588}
+  - component: {fileID: 1023423589}
   m_Layer: 0
   m_Name: Point Light (16)
   m_TagString: Untagged
@@ -15517,6 +15561,21 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &1023423589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1023423586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b2ac129d42a43248bc010f50dc9e924, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocidad: 8
+  limiteZ: 100
+  finCarretera: -100
 --- !u!1001 &1023991152
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18374,6 +18433,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 6.1183314, y: 8.24863, z: 15.230324}
   m_Center: {x: 0.000015258789, y: -0.0000076293945, z: 0.00012207031}
+--- !u!114 &1248576925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1248576917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b2ac129d42a43248bc010f50dc9e924, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocidad: 8
+  limiteZ: 100
+  finCarretera: -100
 --- !u!1 &1248720982
 GameObject:
   m_ObjectHideFlags: 0
@@ -18697,6 +18771,21 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4000011692500568, guid: 02171a191edcf2443bb2f9a697e0160a, type: 3}
   m_PrefabInstance: {fileID: 156305691}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1266238764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1004185769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b2ac129d42a43248bc010f50dc9e924, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocidad: 8
+  limiteZ: 100
+  finCarretera: -100
 --- !u!1001 &1266453281
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20072,6 +20161,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1337440372}
   - component: {fileID: 1337440373}
+  - component: {fileID: 1337440374}
   m_Layer: 0
   m_Name: Point Light (10)
   m_TagString: Untagged
@@ -20156,6 +20246,21 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &1337440374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1337440371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b2ac129d42a43248bc010f50dc9e924, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocidad: 8
+  limiteZ: 100
+  finCarretera: -100
 --- !u!1 &1341316554
 GameObject:
   m_ObjectHideFlags: 0
@@ -21406,6 +21511,21 @@ GameObject:
   m_PrefabInstance: {fileID: 1715470486}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &1430004111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1430004110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b2ac129d42a43248bc010f50dc9e924, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocidad: 8
+  limiteZ: 100
+  finCarretera: -100
+--- !u!114 &1430004112
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -25025,6 +25145,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1000013763268812, guid: 02171a191edcf2443bb2f9a697e0160a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1777933197}
+    - targetCorrespondingSourceObject: {fileID: 1000013763268812, guid: 02171a191edcf2443bb2f9a697e0160a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1777933198}
     - targetCorrespondingSourceObject: {fileID: 1000010852838886, guid: 02171a191edcf2443bb2f9a697e0160a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 453969789}
@@ -25962,6 +26085,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1000013763268812, guid: 02171a191edcf2443bb2f9a697e0160a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1430004111}
+    - targetCorrespondingSourceObject: {fileID: 1000013763268812, guid: 02171a191edcf2443bb2f9a697e0160a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1430004112}
     - targetCorrespondingSourceObject: {fileID: 1000010852838886, guid: 02171a191edcf2443bb2f9a697e0160a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 918058838}
@@ -26638,6 +26764,21 @@ Transform:
   m_PrefabInstance: {fileID: 1643322874}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &1777933197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 927613924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b2ac129d42a43248bc010f50dc9e924, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocidad: 8
+  limiteZ: 100
+  finCarretera: -100
+--- !u!114 &1777933198
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
