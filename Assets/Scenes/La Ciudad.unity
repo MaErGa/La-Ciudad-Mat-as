@@ -4717,6 +4717,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1000012898607606, guid: c6fd786275d4cdb4abd8effce60cf681, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1300031147}
+    - targetCorrespondingSourceObject: {fileID: 1000012898607606, guid: c6fd786275d4cdb4abd8effce60cf681, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1300031148}
   m_SourcePrefab: {fileID: 100100000, guid: c6fd786275d4cdb4abd8effce60cf681, type: 3}
 --- !u!1001 &353921461
 PrefabInstance:
@@ -13038,7 +13041,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &868833214
 Transform:
   m_ObjectHideFlags: 0
@@ -13047,13 +13050,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 868833213}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.32332635, y: -0.1341369, z: -0.32155102, w: 0.8798138}
-  m_LocalPosition: {x: 96.57008, y: 121.9014, z: -49.500534}
+  m_LocalRotation: {x: 0.5182077, y: -0.031534545, z: 0.11955146, w: 0.84627056}
+  m_LocalPosition: {x: 96.21966, y: 130.14107, z: -40.010117}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1987755276}
-  m_LocalEulerAnglesHint: {x: -40.935, y: -2.132, z: -39.357}
+  m_LocalEulerAnglesHint: {x: 62.206, y: 8.7, z: 21.337}
 --- !u!124 &868833216
 Behaviour:
   m_ObjectHideFlags: 0
@@ -19576,7 +19579,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b2ac129d42a43248bc010f50dc9e924, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocidad: 8
+  velocidad: 5
   limiteZ: 100
   finCarretera: -100
 --- !u!1001 &1258319366
@@ -20349,12 +20352,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1300031143}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b46cb29aea3a92a4a9618a81a27b01a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  metrosSeg: 10
+  metrosSeg: 1
 --- !u!54 &1300031146
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -20478,6 +20481,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1300031148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1300031143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b2ac129d42a43248bc010f50dc9e924, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocidad: 5
+  limiteZ: 100
+  finCarretera: -100
 --- !u!1001 &1302860668
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21052,7 +21070,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1323577503
 Transform:
   m_ObjectHideFlags: 0
@@ -21061,13 +21079,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1323577502}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0.9289711, z: 0, w: 0.3701522}
-  m_LocalPosition: {x: 107.9, y: 121.9, z: -49.5}
+  m_LocalRotation: {x: 0.18736623, y: -0.68973035, z: 0.27705634, w: 0.6421882}
+  m_LocalPosition: {x: 107.83, y: 137.69, z: -49.53}
   m_LocalScale: {x: 1.0000005, y: 1, z: 1.0000005}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1987755276}
-  m_LocalEulerAnglesHint: {x: 0, y: -136.55, z: 0}
+  m_LocalEulerAnglesHint: {x: 38.524, y: -91.587, z: 7.15}
 --- !u!124 &1323577505
 Behaviour:
   m_ObjectHideFlags: 0
@@ -24396,12 +24414,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camaraA: {fileID: 381002205}
   camaraB: {fileID: 921311665}
+  camaraC: {fileID: 868833217}
+  camaraD: {fileID: 1323577506}
   objeto1: {fileID: 1934403215}
   destinoObjeto2: {fileID: 1300031144}
-  velocidadMovimiento: 5
+  velocidadSeguimiento: 10
+  velocidadFade: 5
   escalaSlowMo: 0.5
-  velocidadFade: 10
-  pantallaFade: {fileID: 915750241}
+  traseraProfundidad: 10
+  traseraAltura: 5
+  lateralDistancia: 10
+  lateralAltura: 3
+  lateralRetroceso: 1
+  frontalProfundidad: 10
+  frontalAltura: 5
+  frontalLookAtY: 0.3
+  objetivoFinalCamaraA: {fileID: 1074201438}
+  finalProfundidad: 6
+  finalAltura: 2
+  cenitalAlturaMin: 20
+  cenitalMultAltura: 0.75
+  cenitalFovMin: 40
+  cenitalFovMax: 90
+  cenitalMultFov: 2
 --- !u!114 &1509005910
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24414,16 +24449,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae377374d17b505438a8941a37425fa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camaraA: {fileID: 381002205}
-  camaraB: {fileID: 921311665}
-  objeto1: {fileID: 1934403215}
-  destinoObjeto2: {fileID: 1300031144}
-  velocidadSeguimiento: 5
-  distanciaDetras: 6
-  alturaOffset: 2
-  velocidadFade: 0.5
-  escalaSlowMo: 0.3
-  pantallaFade: {fileID: 915750241}
 --- !u!1001 &1510924798
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30790,12 +30815,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 854406862}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7b2ac129d42a43248bc010f50dc9e924, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocidad: 8
+  velocidad: 5
   limiteZ: 100
   finCarretera: -100
 --- !u!114 &1934403220
@@ -30805,12 +30830,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 854406862}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b46cb29aea3a92a4a9618a81a27b01a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  metrosSeg: 0
+  metrosSeg: 5
 --- !u!82 &1934403221
 AudioSource:
   m_ObjectHideFlags: 0
