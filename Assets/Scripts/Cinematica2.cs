@@ -9,7 +9,8 @@ using UnityEngine;
 ///    - camaraA: tu cámara principal (la que ya tienes en escena)
 ///    - camaraB: una segunda cámara en posición/ángulo diferente
 ///    - objeto1: el personaje principal o actor que se mueve
-///    - objeto2: el objetivo/enemigo hacia donde se mueve objeto1
+///    - destinoObjeto2: el objetivo/enemigo hacia donde se mueve objeto1
+///    - pantallaFade: una UI Image negra que cubra toda la pantalla
 /// 4. Dale Play — la cinemática arranca sola desde Start()
 /// 5. Al terminar, camaraA se reactiva para volver al gameplay
 /// </summary>
@@ -25,26 +26,32 @@ public class Cinematica2 : MonoBehaviour
     // Personaje u objeto que se moverá durante la cinemática
     public Transform objeto1;
     // Destino u objetivo al que se dirige objeto1
-    public Transform destinoObjeto2; //meta del objeto 1
+    public Transform destinoObjeto2;
 
     [Header("Configuración de movimiento")]
-    // Equivale a metrosSeg en TrasladarObjeto — controla la velocidad general
+    // Velocidad de traslado de objeto1 hacia el destino
     public float velocidadMovimiento = 3f;
-    // Valor de slow motion: 0.3 = 30% de velocidad normal (EscalarTiempo)
+    // Valor de slow motion: 0.3 = 30% de velocidad normal
     public float escalaSlowMo = 0.3f;
-    // Velocidad del fade entre cámaras (segundos que dura la transición)
+    // Duración del fade en segundos
     public float velocidadFade = 0.5f;
 
-    // Acumula tiempo frame a frame, igual que TiempoDelta
-    private float tiempoTranscurrido = 0f;
-
-    // Canvas/imagen negra para el fade — créala en el Inspector:
-    // GameObject > UI > Image, color negro, ocupa toda la pantalla
-    // Asígnala aquí desde el Inspector
+    // Canvas/imagen negra para el fade
+    // Crea: GameObject > UI > Image, color negro, que ocupe toda la pantalla
     public UnityEngine.UI.Image pantallaFade;
 
     void Start()
     {
+        // CORRECCIÓN 1: Advertencia clara si faltan referencias obligatorias
+        if (camaraA == null || camaraB == null || objeto1 == null || destinoObjeto2 == null)
+        {
+            Debug.LogError("Cinematica2: Faltan referencias en el Inspector. Asigna camaraA, camaraB, objeto1 y destinoObjeto2.");
+            return;
+        }
+
+        if (pantallaFade == null)
+            Debug.LogWarning("Cinematica2: pantallaFade no asignado. Los fades serán ignorados.");
+
         // Al iniciar: solo camaraA visible, camaraB apagada
         camaraA.enabled = true;
         camaraB.enabled = false;
@@ -57,144 +64,139 @@ public class Cinematica2 : MonoBehaviour
     }
 
     // ─────────────────────────────────────────────────────────────────
-    // FADE: oscurece o aclara la pantalla interpolando el alpha
-    // Uso interno: yield return StartCoroutine(Fade(0f, 1f)) para fundir a negro
-    //              yield return StartCoroutine(Fade(1f, 0f)) para abrir desde negro
+    // FADE: oscurece o aclara la pantalla interpolando el alpha.
+    // Usa unscaledDeltaTime para que funcione correctamente con slow motion.
+    // yield return StartCoroutine(Fade(0f, 1f)) → funde a negro
+    // yield return StartCoroutine(Fade(1f, 0f)) → abre desde negro
     // ─────────────────────────────────────────────────────────────────
     IEnumerator Fade(float alphaInicio, float alphaFin)
     {
-        if (pantallaFade == null) yield break; // si no asignaste la imagen, se salta
+        if (pantallaFade == null) yield break;
 
         float t = 0f;
         while (t < velocidadFade)
         {
-            t += Time.unscaledDeltaTime; // usa tiempo real para que funcione con slow mo
+            t += Time.unscaledDeltaTime; // tiempo real, no afectado por slow motion
             float alpha = Mathf.Lerp(alphaInicio, alphaFin, t / velocidadFade);
             pantallaFade.color = new Color(0, 0, 0, alpha);
             yield return null;
         }
+        // Asegura el valor final exacto al terminar el bucle
         pantallaFade.color = new Color(0, 0, 0, alphaFin);
     }
 
     IEnumerator SecuenciaCinematica()
     {
+        // Desactiva todos los scripts de objeto1 para que no se mueva solo
+        MonoBehaviour[] scriptsObjeto1 = objeto1.GetComponents<MonoBehaviour>();
+        foreach (MonoBehaviour script in scriptsObjeto1)
+            script.enabled = false;
+
         // ─────────────────────────────────────────
-        // FASE 1: CámaraA baja desde arriba
-        // Basado en Vector3Movimiento (Vector3.down) y TiempoDelta
-        // objeto1 rota para mirar a destinoObjeto2 mientras la cámara baja
+        // FASE 1: CámaraA baja desde arriba mientras objeto1 gira hacia destinoObjeto2
         // ─────────────────────────────────────────
         float duracionFase1 = 2f;
-        tiempoTranscurrido = 0f;
+        float tiempoFase1 = 0f; // CORRECCIÓN 2: variable local por fase, evita reutilizar el campo
 
         Vector3 posInicioCam = camaraA.transform.position;
-        // Vector3.down es el mismo campo "abajo" de Vector3Movimiento
         Vector3 posFinCam = posInicioCam + Vector3.down * 4f;
 
-        // Rotación inicial y final de objeto1 mirando a objeto2 (MirarHacia)
+        // Calcula la rotación final de objeto1 mirando a destinoObjeto2
         Quaternion rotInicio = objeto1.rotation;
-        objeto1.LookAt(destinoObjeto2); // calcula adónde tiene que girar
+        objeto1.LookAt(destinoObjeto2);
         Quaternion rotFin = objeto1.rotation;
-        objeto1.rotation = rotInicio; // regresa para interpolar desde el inicio
+        objeto1.rotation = rotInicio; // regresa al inicio para interpolar suavemente
 
-        while (tiempoTranscurrido < duracionFase1)
+        while (tiempoFase1 < duracionFase1)
         {
-            // TiempoDelta: acumula tiempo real cada frame
-            tiempoTranscurrido += Time.deltaTime;
-            float t = tiempoTranscurrido / duracionFase1;
+            tiempoFase1 += Time.deltaTime;
+            float t = tiempoFase1 / duracionFase1;
 
-            // Mueve la cámara suavemente hacia abajo
             camaraA.transform.position = Vector3.Lerp(posInicioCam, posFinCam, t);
-
-            // objeto1 rota progresivamente hacia objeto2 (MirarHacia suavizado)
             objeto1.rotation = Quaternion.Slerp(rotInicio, rotFin, t);
 
             yield return null;
         }
 
         // ─────────────────────────────────────────
-        // FASE 2: CámaraA se fija mirando a objeto1 (MirarHacia)
-        // LookAt es exactamente lo que hace MirarHacia en su Update()
+        // FASE 2: CámaraA apunta a objeto1 y espera un momento
         // ─────────────────────────────────────────
         camaraA.transform.LookAt(objeto1);
         yield return new WaitForSeconds(1f);
 
         // ─────────────────────────────────────────
-        // FASE 3: objeto1 se traslada hacia objeto2 (TrasladarObjeto)
+        // FASE 3: objeto1 se acerca a destinoObjeto2 (se detiene cerca, no encima)
         // La cámara lo sigue con LookAt en tiempo real
         // ─────────────────────────────────────────
         float duracionFase3 = 2f;
-        tiempoTranscurrido = 0f;
+        float tiempoFase3 = 0f; // variable local
 
         Vector3 origenObjeto1 = objeto1.position;
-        Vector3 destinoObjeto1 = destinoObjeto2.position;
 
-        while (tiempoTranscurrido < duracionFase3)
+        // CORRECCIÓN 3: objeto1 se detiene a 1 unidad de distancia del destino,
+        // así no se superpone visualmente con destinoObjeto2
+        Vector3 direccion = (destinoObjeto2.position - objeto1.position).normalized;
+        float distancia = Vector3.Distance(objeto1.position, destinoObjeto2.position);
+        float margen = Mathf.Min(1f, distancia * 0.5f); // margen adaptable: nunca más de la mitad
+        Vector3 destinoObjeto1 = destinoObjeto2.position - direccion * margen;
+
+        while (tiempoFase3 < duracionFase3)
         {
-            // Time.deltaTime equivale al metrosSeg * Time.deltaTime de TrasladarObjeto
-            tiempoTranscurrido += Time.deltaTime;
+            tiempoFase3 += Time.deltaTime;
             objeto1.position = Vector3.Lerp(origenObjeto1, destinoObjeto1,
-                                            tiempoTranscurrido / duracionFase3);
+                                            tiempoFase3 / duracionFase3);
 
-            // MirarHacia en tiempo real: la cámara nunca pierde de vista a objeto1
             camaraA.transform.LookAt(objeto1);
             yield return null;
         }
 
         // ─────────────────────────────────────────
-        // FASE 4: Fade a negro → cambio a CámaraB → Fade de vuelta
-        // + slow motion al abrir (EscalarTiempo)
+        // FASE 4: Fade a negro → cambio a CámaraB → Fade de vuelta con slow motion
         // ─────────────────────────────────────────
 
-        // Oscurece la pantalla (fade out)
-        yield return StartCoroutine(Fade(0f, 1f));
+        yield return StartCoroutine(Fade(0f, 1f)); // oscurece la pantalla
 
-        // Con pantalla negra: desactiva camaraA, activa camaraB
+        // Con pantalla negra: cambia de cámara de forma imperceptible
         camaraA.enabled = false;
         camaraB.enabled = true;
-        // CámaraB apunta a objeto1 desde su ángulo (MirarHacia)
-        camaraB.transform.LookAt(objeto1);
+        camaraB.transform.LookAt(objeto1); // CámaraB ya apunta a objeto1
 
-        // Activa slow motion antes de revelar la nueva cámara (EscalarTiempo)
-        // Cambia escalaSlowMo en el Inspector para ajustar la intensidad
+        // Activa slow motion antes de revelar la nueva cámara
         Time.timeScale = escalaSlowMo;
 
-        // Abre la pantalla desde negro con la nueva cámara ya activa
-        yield return StartCoroutine(Fade(1f, 0f));
+        yield return StartCoroutine(Fade(1f, 0f)); // abre con la nueva cámara
 
-        // Mantén el slow mo 2 segundos en tiempo real
-        // WaitForSecondsRealtime ignora timeScale, por eso funciona con slow mo
+        // Espera en tiempo real (ignora timeScale, funciona con slow motion)
         yield return new WaitForSecondsRealtime(2f);
 
-        // Restaura el tiempo normal (EscalarTiempo a 1)
+        // Restaura el tiempo normal
         Time.timeScale = 1f;
 
         // ─────────────────────────────────────────
-        // FASE 5: objeto2 se mueve a posición final (Vector3Constructor)
-        // CámaraB lo sigue con LookAt
+        // FASE 5: destinoObjeto2 se mueve a posición final, CámaraB lo sigue
         // ─────────────────────────────────────────
 
-        // Vector3Constructor: posición destino definida con new Vector3
-        // Cambia estos valores en el Inspector o hardcodéalos aquí
-        Vector3 posicionFinal = new Vector3(0f, 0f, 10f);
+        // CORRECCIÓN 4: La posición final era fija (0,0,10). Ahora es relativa
+        // a la posición actual de destinoObjeto2 para que funcione en cualquier escena.
+        // Si prefieres una posición absoluta, cambia esto por: new Vector3(0f, 0f, 10f)
+        Vector3 posicionFinal = destinoObjeto2.position + new Vector3(3f, 0f, 3f);
 
         float duracionFase5 = 1.5f;
-        tiempoTranscurrido = 0f;
+        float tiempoFase5 = 0f; // variable local
         Vector3 origenObjeto2 = destinoObjeto2.position;
 
-        while (tiempoTranscurrido < duracionFase5)
+        while (tiempoFase5 < duracionFase5)
         {
-            tiempoTranscurrido += Time.deltaTime;
+            tiempoFase5 += Time.deltaTime;
             destinoObjeto2.position = Vector3.Lerp(origenObjeto2, posicionFinal,
-                                            tiempoTranscurrido / duracionFase5);
+                                            tiempoFase5 / duracionFase5);
 
-            // CámaraB sigue a objeto2 mientras se mueve (MirarHacia)
             camaraB.transform.LookAt(destinoObjeto2);
             yield return null;
         }
 
         // ─────────────────────────────────────────
         // FIN: Fade a negro, restaura camaraA para el gameplay
-        // Time.realtimeSinceStartup = concepto de TiempoPasado
         // ─────────────────────────────────────────
         yield return StartCoroutine(Fade(0f, 1f));
 
@@ -203,6 +205,10 @@ public class Cinematica2 : MonoBehaviour
 
         yield return StartCoroutine(Fade(1f, 0f));
 
-        Debug.Log($"Cinemática terminada. Tiempo real desde inicio: {Time.realtimeSinceStartup}s");
+        // Reactiva todos los scripts de objeto1 para volver al gameplay
+        foreach (MonoBehaviour script in scriptsObjeto1)
+            script.enabled = true;
+
+        Debug.Log($"Cinemática terminada. Tiempo real desde inicio: {Time.realtimeSinceStartup:F2}s");
     }
 }
