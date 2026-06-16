@@ -24554,7 +24554,7 @@ MonoBehaviour:
   objeto1: {fileID: 1934403215}
   destinoObjeto2: {fileID: 1300031144}
   velocidadSeguimiento: 10
-  velocidadFade: 1
+  velocidadFade: 1.5
   escalaSlowMo: 0.5
   traseraProfundidad: 10
   traseraAltura: 5
