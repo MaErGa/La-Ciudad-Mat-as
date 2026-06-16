@@ -10727,7 +10727,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -950, y: -879}
+  m_AnchoredPosition: {x: -982, y: -879}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &710319140
@@ -24554,7 +24554,7 @@ MonoBehaviour:
   objeto1: {fileID: 1934403215}
   destinoObjeto2: {fileID: 1300031144}
   velocidadSeguimiento: 10
-  velocidadFade: 5
+  velocidadFade: 1
   escalaSlowMo: 0.5
   traseraProfundidad: 10
   traseraAltura: 5
@@ -24575,7 +24575,9 @@ MonoBehaviour:
   textoPressButton: {fileID: 710319140}
   mensajePressButton: PRESS ANY BUTTON
   velocidadParpadeo: 1.5
+  textoVisibleDesdeElInicio: 0
   imagenLogo: {fileID: 886715694}
+  logoVisibleDesdeElInicio: 0
 --- !u!114 &1509005910
 MonoBehaviour:
   m_ObjectHideFlags: 0
