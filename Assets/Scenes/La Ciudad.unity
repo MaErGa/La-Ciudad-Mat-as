@@ -24565,8 +24565,8 @@ MonoBehaviour:
   frontalAltura: 5
   frontalLookAtY: 0.3
   objetivoFinalCamaraA: {fileID: 1074201438}
-  finalProfundidad: 6
-  finalAltura: 2
+  finalProfundidad: 10
+  finalAltura: 10
   cenitalAlturaMin: 20
   cenitalMultAltura: 0.75
   cenitalFovMin: 40
@@ -25207,9 +25207,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1000011545962798, guid: e9998600c6a59394c8170891b0cf1f22, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1934403219}
-    - targetCorrespondingSourceObject: {fileID: 1000011545962798, guid: e9998600c6a59394c8170891b0cf1f22, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1934403220}
     - targetCorrespondingSourceObject: {fileID: 1000011545962798, guid: e9998600c6a59394c8170891b0cf1f22, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1934403221}
@@ -30964,19 +30961,6 @@ MonoBehaviour:
   velocidad: 5
   limiteZ: 100
   finCarretera: -100
---- !u!114 &1934403220
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 854406862}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b46cb29aea3a92a4a9618a81a27b01a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  metrosSeg: 5
 --- !u!82 &1934403221
 AudioSource:
   m_ObjectHideFlags: 0
